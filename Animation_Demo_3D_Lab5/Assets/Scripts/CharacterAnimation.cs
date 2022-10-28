@@ -45,8 +45,18 @@ public class CharacterAnimation : MonoBehaviour
         float ver = movePerson.vertical;
         float hor = movePerson.horizontal;
 
-        animator.SetFloat("vertical", ver, 0.15f, Time.deltaTime);
-        animator.SetFloat("horizontal", hor, 0.15f, Time.deltaTime);
+        if (movePerson.moveDirection != Vector3.zero && !Input.GetKey(KeyCode.LeftShift))
+        {
+            animator.SetFloat("vertical", ver, 0.1f, Time.deltaTime);
+            animator.SetFloat("horizontal", hor, 0.1f, Time.deltaTime);
+            Walk();
+        }
+        else if (movePerson.moveDirection == Vector3.zero)
+        {
+            animator.SetFloat("vertical", ver, 0.1f, Time.deltaTime);
+            animator.SetFloat("horizontal", hor, 0.1f, Time.deltaTime);
+            Idle();
+        }
     }
 
     private void Idle()
